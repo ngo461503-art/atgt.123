@@ -1,17 +1,22 @@
+"use client"
+
+import { useState } from "react"
 import Header from "@/components/header"
 import Hero from "@/components/hero"
 import Features from "@/components/features"
-import ChatBot from "@/components/chatbot"
+import Chatbot from "@/components/chatbot"
 import Footer from "@/components/footer"
 
 export default function Home() {
+  const [showChat, setShowChat] = useState(false)
+
   return (
-    <main className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-blue-50 to-background">
       <Header />
-      <Hero />
+      <Hero onChatOpen={() => setShowChat(true)} />
       <Features />
-      <ChatBot />
-      <Footer />
-    </main>
+      {showChat && <Chatbot onClose={() => setShowChat(false)} />}
+      <Footer onChatOpen={() => setShowChat(true)} />
+    </div>
   )
 }
